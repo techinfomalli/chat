@@ -5,7 +5,7 @@ st.title('Aask anything you want to know')
 
 with st.sidebar:
     st.title('provide your API key')
-    OPENAI_API_KEY = st.text_input('OPEN AI api Key',type="password")
+    OPENAI_API_KEY = st.text_input('OPEN AI api Key')
 
 if not OPENAI_API_KEY:
     st.info('Enter Open api key to continue')
@@ -21,6 +21,7 @@ if question:
     response = llm.invoke(question)
 
     st.write(response.content)
+
 
 
 
