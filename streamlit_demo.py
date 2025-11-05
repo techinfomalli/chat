@@ -4,7 +4,7 @@ import streamlit as st
 st.title('Aask anything you want to know')
 
 with st.sidebar:
-    st.title('provide your API key')
+    st.title('provide your API key or ASK Mallikarjun for key')
     OPENAI_API_KEY = st.text_input('OPEN AI api Key')
 
 if not OPENAI_API_KEY:
@@ -23,6 +23,7 @@ try:
         st.write(response.content)  # Only runs if no exception
 except Exception as e:
     st.error(f"OpenAI error: {e}")
+
 
 
 
