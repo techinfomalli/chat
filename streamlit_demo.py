@@ -1,33 +1,32 @@
-from langchain_openai import ChatOpenAI
 import streamlit as st
+from langchain_openai import ChatOpenAI
 
-st.title('Aask anything you want to know')
+# App Title
+st.set_page_config(page_title="Ask Anything", page_icon="💬")
+st.title("💬 Ask Anything You Want to Know")
 
+# Sidebar for API Key Input
 with st.sidebar:
-    st.title('provide your API key or ASK Mallikarjun for key')
-    OPENAI_API_KEY = st.text_input('OPEN AI api Key')
+    st.header("🔐 OpenAI API Key")
+    OPENAI_API_KEY = st.text_input("Enter your OpenAI API key", type="password")
+    st.caption("Don't have one? Ask Mallikarjun for access.")
 
+# Validate API Key
 if not OPENAI_API_KEY:
-    st.info('Enter Open api key to continue')
+    st.warning("Please enter your OpenAI API key to continue.")
     st.stop()
 
-
+# Initialize Chat Model
 llm = ChatOpenAI(model="gpt-4o", api_key=OPENAI_API_KEY)
 
+# Question Input
+question = st.text_input("📝 What's your question?", placeholder="Type your question here...")
 
-question = st.text_input("Enter the question:")
-
-try:
-    if question:
+# Response Handling
+if question:
+    try:
         response = llm.invoke(question)
-        st.write(response.content)  # Only runs if no exception
-except Exception as e:
-    st.error(f"OpenAI error: {e}")
-
-
-
-
-
-
-
-
+        st.subheader("📣 Response")
+        st.write(response.content)
+    except Exception as e:
+        st.error(f"❌ Error communicating with OpenAI: {e}")
