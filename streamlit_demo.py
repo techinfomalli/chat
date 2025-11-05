@@ -20,10 +20,10 @@ question = st.text_input("Enter the question:")
 try:
     if question:
         response = llm.invoke(question)
+        st.write(response.content)  # Only runs if no exception
 except Exception as e:
     st.error(f"OpenAI error: {e}")
 
-    st.write(response.content)
 
 
 
